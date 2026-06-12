@@ -1,0 +1,73 @@
+@model IEnumerable<Nexus_Communication_System.Models.Service>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Category
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service_Charge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estimated_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warranty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service_Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @(item.ServiceCategory != null
+                        ? item.ServiceCategory.Category_Name
+                        : "")
+                </td>
+            <td>
+                @Html.DisplayFor(model => item.Service_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Service_Charge)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Estimated_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Warranty)
+            </td>
+                <td>
+                    @(item.Service_Status ? "Active" : "Inactive")
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Service_ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Service_ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Service_ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

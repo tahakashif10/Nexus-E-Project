@@ -1,0 +1,69 @@
+@model Nexus_Communication_System.Models.Order
+
+<h2>Book Service</h2>
+
+<form asp-action="Create">
+
+    <div class="form-group">
+        <label>Category</label>
+        <select id="Category_ID" class="form-control">
+            <option value="">Select Category</option>
+
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category.Category_ID">
+                    @category.Category_Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mt-3">
+        <label>Service</label>
+
+        <select asp-for="Service_ID" class="form-control">
+            <option value="">Select Service</option>
+
+            @foreach (var service in ViewBag.Services)
+            {
+                <option value="@service.Service_ID"
+                        data-category="@service.Category_ID">
+
+                    @service.Service_Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Place Order
+    </button>
+
+</form>
+
+<script>
+    document.getElementById("Category_ID")
+    .addEventListener("change", function () {
+
+        var categoryId = this.value;
+
+        var serviceDropdown =
+            document.getElementById("Service_ID");
+
+        var options =
+            serviceDropdown.querySelectorAll("option");
+
+        options.forEach(function(option){
+
+            if(option.value === "")
+                return;
+
+            if(option.dataset.category === categoryId)
+                option.hidden = false;
+            else
+                option.hidden = true;
+        });
+    });
+</script>

@@ -1,0 +1,33 @@
+﻿@model Nexus_Communication_System.Models.Order
+
+<h2>Assign Employee</h2>
+
+<form asp-action="AssignEmployee">
+
+    <input type="hidden"
+           asp-for="Order_ID" />
+
+    <div class="form-group">
+        <label>Select Employee</label>
+
+        <select asp-for="Employee_ID"
+                class="form-control">
+
+            @foreach (var emp in ViewBag.Employees)
+            {
+                <option value="@emp.Employee_ID">
+                    @emp.Employee_Name
+                </option>
+            }
+
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit"
+            class="btn btn-primary">
+        Assign
+    </button>
+
+</form>
